@@ -1,0 +1,171 @@
+use praticedb;
+
+
+create table student(
+	id int PRIMARY KEY auto_increment,
+    name varchar(255),
+    email varchar(255),
+    gender char
+);
+
+
+INSERT INTO student (stdname, email, gender, teachid) VALUES
+('Rahul Sharma',      'rahul.sharma@gmail.com',      'm', 2),
+('Priya Reddy',       'priya.reddy@gmail.com',       'f', 3),
+('Kiran Kumar',       'kiran.kumar@gmail.com',       'm', 4),
+('Sneha Patel',       'sneha.patel@gmail.com',       'f', 1),
+('Arjun Naidu',       'arjun.naidu@gmail.com',       'm', 3),
+('Anjali Verma',      'anjali.verma@gmail.com',      'f', 3),
+('Vikram Singh',      'vikram.singh@gmail.com',      'm', 1),
+('Pooja Yadav',       'pooja.yadav@gmail.com',       'f', 5),
+('Suresh Babu',       'suresh.babu@gmail.com',       'm', 5),
+('Deepika Rao',       'deepika.rao@gmail.com',       'f', 1),
+('Mahesh Kumar',      'mahesh.kumar@gmail.com',      'm', 3),
+('Keerthi Reddy',     'keerthi.reddy@gmail.com',     'f', 3),
+('Naveen Kumar',      'naveen.kumar@gmail.com',      'm', 4),
+('Harika Naidu',      'harika.naidu@gmail.com',      'f', 5),
+('Sai Kiran',         'sai.kiran@gmail.com',         'm', 4);
+
+truncate table student;
+
+
+select s1.stdname ,s2.stdname  from student s1,student s2
+where s1.id=s2.teachid;
+
+select s1.stdname,s2.stdname from student AS s1
+Inner join student AS s2  ON
+s1.id=s2.teachid;
+
+
+select s1.stdname,s2.email from student  AS s1
+Inner join student AS s2 ON
+s1.id=s2.teachid;
+
+
+select * from student;
+
+alter table student add age int;
+
+alter table student modify gender varchar(10);
+
+ALTER TABLE student
+RENAME COLUMN name TO stdname;
+
+
+alter table student drop column age;
+
+alter table student rename to students;
+
+alter table students rename to student;
+
+alter table student modify email varchar(255) not null;
+
+alter table student modify gender char(1) default 'm';
+
+alter table student add teachid int;
+
+desc student;
+select *from student;
+
+
+
+
+select stdname,email from student 
+where gender='f';
+
+
+select * from  student 
+where teachid=3;
+
+
+select stdname from student 
+where stdname='naveen kumar';
+
+
+
+select * from student ORDER BY stdname asc;
+
+
+select * from student 
+where email like '%gmail.com';
+
+
+SELECT gender, COUNT(*) AS total_students
+FROM student
+GROUP BY gender;
+
+select gender ,count(*)
+from student
+Group by gender;
+
+
+select gender ,count(*) from student
+GROUP BY gender;
+
+
+select count(*) from student
+where teachid is not null;
+
+select teachid,count(*)  AS s from student
+GROUP BY teachid
+ORDER BY s desc
+limit 1;
+
+select gender,count(*) as s from student
+group by gender
+order by s desc
+limit 1;
+
+
+select s1.stdname,s2.stdname from student s1
+join student s2 ON
+s1.id=s2.teachid; 
+
+select * from praticedb.student;
+
+select s1.stdname  from praticedb.student s1
+LEFT JOIN praticedb.student s2 ON
+s1.id=s2.teachid;
+
+SELECT * FROM student
+ORDER BY stdname ASC
+LIMIT 5;
+
+
+SELECT COUNT(*) AS total_students
+FROM student;
+
+
+SELECT gender, COUNT(*) AS total
+FROM student
+GROUP BY gender;
+
+
+SELECT teachid, COUNT(*) AS total_students
+FROM student
+WHERE teachid IS NOT NULL
+GROUP BY teachid
+ORDER BY total_students DESC;
+
+
+SELECT teachid, COUNT(*) AS total_students
+FROM student
+GROUP BY teachid
+HAVING COUNT(*) > 2;
+
+
+SELECT gender, COUNT(*) AS total
+FROM student
+GROUP BY gender
+ORDER BY total DESC
+LIMIT 1;
+
+
+SELECT *
+FROM student
+WHERE id > (
+    SELECT AVG(id)
+    FROM student
+);
+
+select * from expensetrack.users;
